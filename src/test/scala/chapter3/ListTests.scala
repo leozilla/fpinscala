@@ -115,4 +115,37 @@ class ListTests extends FlatSpec with Matchers {
   "reverseViaFold of list with multiple elements" should "return the reverse of that list" in {
     List.reverseViaFoldLeft(List(1,2,3)) should be (List(3,2,1))
   }
+
+  "appendViaFold two empty list" should "return empty list" in {
+    List.appendViaFold(List(), List()) should be (List())
+  }
+
+  "appendViaFold empty list to list" should "return new list" in {
+    List.appendViaFold(List(1,2), List()) should be (List(1,2))
+  }
+
+  "appendViaFold list to empty list" should "return new list" in {
+    List.appendViaFold(List(), List(1,2)) should be (List(1,2))
+  }
+
+  "appendViaFold two lists" should "return new list" in {
+    List.appendViaFold(List(1,2), List(3,4)) should be (List(1,2,3,4))
+  }
+
+  "concat lists with one element" should "return single list" in {
+    List.concat(List(List(1), List(2), List(3))) should be (List(1,2,3))
+  }
+
+  "concat empty list" should "return single list" in {
+    List.concat(List(List(), List(1), List(2,3))) should be (List(1,2,3))
+  }
+
+  "flatMap" should "flatten" in {
+    List.flatMap(List(1,2,3))(i => List(i,i)) should be (List(1,1,2,2,3,3))
+  }
+
+  "hasSubsequence of empty list" should "not have any subsequence" in {
+    List.hasSubsequence(List(), List(1)) should be (false)
+    List.hasSubsequence(List(), List(1,2)) should be (false)
+  }
 }
